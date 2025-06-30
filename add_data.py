@@ -1,12 +1,14 @@
 import requests
 
-data_points = [
-    {"voltage": 19.2, "current": 2.1},
-    {"voltage": 20.0, "current": 1.8},
-    {"voltage": 18.7, "current": 2.0},
-    {"voltage": 17.9, "current": 2.2},
-]
+url = "https://solar-backend-jdxk.onrender.com/upload"
 
-for point in data_points:
-    response = requests.post("http://localhost:5000/upload", json=point)
-    print(response.json())
+# You can change these values to simulate new entries
+test_data = {
+    "voltage": 19.5,
+    "current": 2.3
+}
+
+response = requests.post(url, json=test_data)
+
+print("Status:", response.status_code)
+print("Response:", response.json())
