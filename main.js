@@ -1,4 +1,4 @@
-const apiURL = "https://your-render-backend-url.onrender.com/data";
+const apiURL = "https://solar-backend-jdxk.onrender.com/data";
   // Flask endpoint
 const panelArea = 0.5;                        // in m²
 const irradiance = 1000;                      // W/m²
