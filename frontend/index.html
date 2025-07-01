@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Solar Panel Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>☀️ Solar Dashboard</h1>
+
+    <div class="metrics">
+      <div class="metric-card">🔌 Voltage <span id="voltage">--</span> V</div>
+      <div class="metric-card">⚡ Current <span id="current">--</span> A</div>
+      <div class="metric-card">🔋 Power <span id="power">--</span> W</div>
+    </div>
+
+    <div class="buttons">
+      <button id="refreshBtn">🔄 Refresh</button>
+      <button id="downloadBtn">⬇ Export CSV</button>
+    </div>
+
+    <canvas id="graph"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
