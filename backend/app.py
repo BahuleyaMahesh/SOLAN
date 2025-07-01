@@ -1,43 +1,25 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 from flask_cors import CORS
-from datetime import datetime
+import os
+import datetime
 
 app = Flask(__name__)
 CORS(app)
 
-# In-memory log of data
-solar_log = []
+data = {
+    "voltage": 18.7,
+    "current": 2.2,
+    "power": 41.14,
+    "timestamp": datetime.datetime.now().strftime("%H:%M:%S")
+}
 
 @app.route('/')
 def home():
-    return "☀️ Solar Dashboard Backend Running"
+    return "Solar Backend is Live!"
 
-@app.route('/data', methods=['GET'])
+@app.route('/data')
 def get_data():
-    if not solar_log:
-        return jsonify({"error": "No data available"}), 404
-    return jsonify(solar_log[-1])  # Return latest reading
+    return jsonify(data)
 
-@app.route('/upload', methods=['POST'])
-def upload_data():
-    try:
-        data = request.json
-        voltage = float(data['voltage'])
-        current = float(data['current'])
-        power = round(voltage * current, 2)
-        timestamp = datetime.now().strftime('%H:%M:%S')
-
-        entry = {
-            'voltage': voltage,
-            'current': current,
-            'power': power,
-            'timestamp': timestamp
-        }
-
-        solar_log.append(entry)
-        return jsonify({"message": "Data received", "entry": entry}), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 400
-
-if __name__ == '__main__':
-    app.run(debug=True)
+port = int(os.environ.get("PORT", 5000))
+app.run(host='0.0.0.0', port=port)
