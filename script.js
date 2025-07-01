@@ -32,10 +32,14 @@ function updateUI({ voltage, current, power, timestamp }) {
   dataLog.push({ voltage, current, power, timestamp });
 }
 
-function refreshData() {
-  const data = generateFakeData();
+const BACKEND_URL = "https://solan-back.onrender.com";
+
+async function refreshData() {
+  const res = await fetch(`${BACKEND_URL}/data`);
+  const data = await res.json();
   updateUI(data);
 }
+
 
 // 5 min refresh trigger via button
 refreshBtn.addEventListener("click", refreshData);
